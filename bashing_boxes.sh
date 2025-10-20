@@ -8,7 +8,7 @@ for item in "${boxes[@]}"; do
     echo "$item"
 done
 
-#while loop so wwe can pick what to do from a menu
+#while loop so we can pick what to do from a menu
 while true; do
     echo ""
     echo "-- Bashing Boxes Menu --"
@@ -21,10 +21,11 @@ while true; do
     read -p "Select an option: " choice
 
     if [ "$choice" -eq 1 ]; then
+        echo "The full list is:"
         for item in "${boxes[@]}"; do
             echo "$item"
         done
-    elif [ "$choice" -eq 2 ]; then
+    elif [ "$choice" -eq 6 ]; then
         echo "Bye!"
         break
     else
