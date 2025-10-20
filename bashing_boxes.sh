@@ -20,11 +20,24 @@ while true; do
     echo "6) Exit"
     read -p "Select an option: " choice
 
+#option to print out the whole list of arrays
     if [ "$choice" -eq 1 ]; then
         echo "The full list is:"
         for item in "${boxes[@]}"; do
             echo "$item"
         done
+
+#option to print an item at X position in the list
+    elif [ "$choice" -eq 2 ]; then
+        echo "Which item would you like to move:"
+        for item in "${boxes[@]}"; do
+            
+        done
+
+#option to add an item to the list
+#option to remove last item to the list
+#option to remove item- from X position
+#option to exit the list and the menu
     elif [ "$choice" -eq 6 ]; then
         echo "Bye!"
         break
