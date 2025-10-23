@@ -50,7 +50,7 @@ while true; do
 
 #option to remove item- from X position
     elif [ "$choice" -eq 5 ]; then
-        read -p "Enter positio"
+        read -p "Enter position"
 #option to exit the list and the menu
     elif [ "$choice" -eq 6 ]; then
         echo "Bye!"
