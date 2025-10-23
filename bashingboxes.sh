@@ -29,14 +29,6 @@ while true; do
 
 #option to print an item at X position in the list
     elif [ "$choice" -eq 2 ]; then
-        echo "Which item would you like to move:"
-        for item in "${boxes[@]}"; do
-            
-        done
-
-#option to add an item to the list
-#option to remove last item to the list
-#option to remove item- from X position
         read -p "Enter position (1-${#boxes[@]}): " pos
         index=$((pos - 1))
         if [ "$index" -ge 0 ] && [ "$index" -lt "${#boxes[@]}" ]; then
@@ -59,7 +51,6 @@ while true; do
 #option to remove item- from X position
     elif [ "$choice" -eq 5 ]; then
         read -p "Enter positio"
-
 #option to exit the list and the menu
     elif [ "$choice" -eq 6 ]; then
         echo "Bye!"
