@@ -32,7 +32,7 @@ while true; do
         read -p "Enter position (1-${#boxes[@]}): " pos
         index=$((pos - 1))
         if [ "$index" -ge 0 ] && [ "$index" -lt "${#boxes[@]}" ]; then
-            echo "Item #$pos: ${boxes[$index}]}"
+            echo "Item #$pos: ${boxes[$index]}"
         else
             echo "Invalid position!"
         fi
@@ -40,7 +40,7 @@ while true; do
     elif [ "$choice" -eq 3 ]; then
         read -p "What item would you like to add?: " new_item
         boxes+=("$new_item")
-        echo "\"$new_item\" added. "
+        echo "\"$new_item\" added."
 
 #option to remove last item to the list
     elif [ "$choice" -eq 4 ]; then
@@ -50,7 +50,16 @@ while true; do
 
 #option to remove item- from X position
     elif [ "$choice" -eq 5 ]; then
-        read -p "Enter position"
+        read -p "Enter position to remove (1-${#boxes[@]}): " pos
+        index=$((pos - 1))
+        if [ "$index" -ge 0 ] && [ "$index" -lt "${#boxes[@]}" ]; then
+            echo "Removing ${boxes[$index]}..."
+            unset 'boxes[index]'
+            boxes=("${boxes[@]}") #rebuild array
+        else
+            echo "Invalid position!"
+        fi
+
 #option to exit the list and the menu
     elif [ "$choice" -eq 6 ]; then
         echo "Bye!"
