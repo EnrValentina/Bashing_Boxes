@@ -18,6 +18,10 @@ while true; do
     echo "4) Remove last item from list"
     echo "5) Remove item- from X position"
     echo "6) Exit"
+    echo "7) Saving current box to a file"
+    echo "8) Loading a previously saved box"
+    echo "9) Listing existing saved boxes"
+    echo "10) Deleting a saved box"
     read -p "Select an option: " choice
 
 #option to print out the whole list of arrays
@@ -68,3 +72,20 @@ while true; do
         echo "Invalid choice"
     fi
 done
+
+#saved boxes options
+
+#making data directory in bash
+    if [ ! -d "data" ]; then
+        mkdir data
+        echo "Created data/ directory."
+    fi
+
+
+#option yo save current box to a file
+    elif [ "$choice" -eq 7 ]; then
+        read -p "Enter name for saved box: " name_of_file
+        declare -p boxes > data/mybox.sh
+        source data/mybox.sh
+        echo "Saving box"
+    fi
