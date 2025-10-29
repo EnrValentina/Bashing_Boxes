@@ -68,24 +68,23 @@ while true; do
     elif [ "$choice" -eq 6 ]; then
         echo "Bye!"
         break
-    else
-        echo "Invalid choice"
-    fi
-done
+    
 
 #saved boxes options
-
-#making data directory in bash
-    if [ ! -d "data" ]; then
-        mkdir data
-        echo "Created data/ directory."
-    fi
 
 
 #option yo save current box to a file
     elif [ "$choice" -eq 7 ]; then
+        if [ ! -d "data" ]; then
+            mkdir data
+            echo "Created data/ directory."
+        fi
+
         read -p "Enter name for saved box: " name_of_file
-        declare -p boxes > data/mybox.sh
-        source data/mybox.sh
-        echo "Saving box"
+        declare -p boxes > "data/${name_of_file}.sh"
+        echo "Box saved as data/${name_of_file}.sh"
+    
+    else
+        echo "Invalid choice"
     fi
+done
