@@ -102,11 +102,11 @@ while true; do
 
             #ask which to load
             read -p "Enter name of file you want to see (wo .sh)"
-            filepath="data/${name_of_file}"
+            filepath="data/${load_name}"
             #check if real
             if [ -f "$filepath" ]; then
-                source="$filepath"
-                echo "Box '{$name_of_file}' loaded"
+                source "$filepath"
+                echo "Box '{$load_name}' loaded"
             else
                 echo "Error file not found"
             fi
