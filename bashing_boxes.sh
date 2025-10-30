@@ -73,7 +73,7 @@ while true; do
 #saved boxes options
 
 
-#option yo save current box to a file
+#option to save current box to a file
     elif [ "$choice" -eq 7 ]; then
         if [ ! -d "data" ]; then
             mkdir data
@@ -83,8 +83,12 @@ while true; do
         read -p "Enter name for saved box: " name_of_file
         declare -p boxes > "data/${name_of_file}.sh"
         echo "Box saved as data/${name_of_file}.sh"
-    
+
+#option to load a previously saved box
+    elif [ "$choice" -eq 8 ]; then
+    if [ ! -d "data" ]; then
+        echo "No saved boxes (no data/ folder)"
     else
-        echo "Invalid choice"
+        echo "Saved Boxes:"
     fi
 done
