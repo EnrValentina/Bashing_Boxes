@@ -90,5 +90,26 @@ while true; do
         echo "No saved boxes (no data/ folder)"
     else
         echo "Saved Boxes:"
+        shopt -s nullglob #makes sure the files array is empty instead of containing a literal data/*.sh if there are no .sh files
+        files=(data/*.sh)
+        if [ ${#files[@]} -eq 0 ]; then
+            echo "No saved boxes yet"
+        else
+            #list saved
+            for file in "${files[@]}"; do
+                echo "- ${file#data/}"
+            done
+
+            #ask which to load
+            read -p "Enter name of file you want to see (wo .sh)"
+            filepath="data/${name_of_file}"
+            #check if real
+            if [ -f "$filepath" ]; then
+                source="$filepath"
+                echo "Box '{$name_of_file}' loaded"
+            else
+                echo "Error file not found"
+            fi
+        fi
     fi
 done
