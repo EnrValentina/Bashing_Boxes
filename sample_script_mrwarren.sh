@@ -47,9 +47,10 @@ display_save_load_menu(){
 	___________________________
 	|
 	| 1) Save current box
-	| 2) Load a Box
-	| 3) Go back to main menu
-	| 4) exit app
+	| 2) See all saved boxes
+	| 3) Load a Box
+	| 4) Go back to main menu
+	| 5) Exit app
 	|
 	---------------------------
 	"
@@ -61,23 +62,30 @@ print_all_items_in_box(){
 	echo "Current box contents:"
     echo "${my_array_of_things[@]}"
     echo "$item"
+    read -p "Press Enter to go back..."
+    display_main_menu
 }
 
 print_item_at_x_position(){
 	read -p "Enter position number: " pos
 	echo "${my_array_of_things[$((pos-1))]}"
-	
+	read -p "Press Enter to go back..."
+    display_main_menu	
 }
 
 add_item_to_list(){
 	read -p "What item would you like to add?: " new_item
         my_array_of_things+=("$new_item")
-        echo "$new_item added."    
+        echo "$new_item added."
+    read -p "Press Enter to go back..."
+    display_main_menu    
 }
 
 remove_last_item(){
 	unset 'my_array_of_things[${#my_array_of_things[@]}-1]'
     echo "Last item removed."
+    read -p "Press Enter to go back..."
+    display_main_menu
 }
 
 remove_item_from_x_position(){
@@ -85,23 +93,41 @@ remove_item_from_x_position(){
 	unset 'my_array_of_things[$((pos-1))]'
 	my_array_of_things=("${my_array_of_things[@]}") # reindex
 	echo "Item removed."
+	read -p "Press Enter to go back..."
+    display_main_menu
 }
 
 save_current_box(){
 	read -p "Enter name of file to save: " filename
-	printf "%s\n" "${my_array_of_things[@]}" > "$filename"
-	echo "Box saved as $filename"
+	printf "%s\n" "${my_array_of_things[@]}" > "${filename}.txt"
+	echo "Box saved as ${filename}.txt"
+	read -p "Press Enter to go back..."
+    display_save_load_menu
 }
 
 load_box_from_data(){
 	read -p "Enter file you want to load: " filename
 	mapfile -t my_array_of_things < "$filename" 2>/dev/null
-	echo -e "\nBox "$filename" loaded"
+	echo -e "\nBox \"$filename"\ loaded"
 	echo "-----------------------------"
 	for item in "${my_array_of_things[@]}"; do
 		echo " - $item"
 	done
 	echo "-----------------------------"
+	read -p "Press Enter to go back..."
+    display_save_load_menu
+}
+
+see_all_saved_boxes(){
+	echo -e "
+| All Saved Boxes |
+___________________
+	"
+	ls *.txt 2>/dev/null || echo "No saved boxes found."
+	echo -e "
+--------------------"
+	read -p "Press Enter to go back..."
+    display_save_load_menu
 }
 
 get_user_input(){
@@ -133,11 +159,13 @@ check_save_menu_selection(){
 		case $user_input in
 		1) save_current_box
 			;;
-		2) load_box_from_data
+		2) see_all_saved_boxes
 			;;
-		3) display_main_menu
+		3) load_box_from_data
 			;;
-		4) exit
+		4) display_main_menu
+			;;
+		5) exit
 			;;
 		*) display_save_load_menu
 			;;
