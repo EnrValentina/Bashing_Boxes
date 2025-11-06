@@ -108,30 +108,32 @@ save_current_box(){
 load_box_from_data(){
 	read -p "Enter file you want to load: " filename
 	mapfile -t my_array_of_things < "$filename" 2>/dev/null
-	echo -e "\nBox \"$filename"\ loaded"
+	echo -e "\nBox '$filename' loaded"
 	echo "-----------------------------"
 	for item in "${my_array_of_things[@]}"; do
 		echo " - $item"
 	done
 	echo "-----------------------------"
 	read -p "Press Enter to go back..."
-    display_save_load_menu
+	display_save_load_menu
 }
 
 see_all_saved_boxes(){
+	clear
 	echo -e "
 | All Saved Boxes |
-___________________
-	"
-	ls *.txt 2>/dev/null || echo "No saved boxes found."
+____________________________________________________________
+		"
+		ls *.txt 2>/dev/null || echo "No saved boxes found."
 	echo -e "
---------------------"
+------------------------------------------------------------
+	"
 	read -p "Press Enter to go back..."
-    display_save_load_menu
+	display_save_load_menu
 }
 
 get_user_input(){
-	read -p "Enter selection from Main Menu: " user_input
+	read -p "Enter selection from Menu: " user_input
 }
 
 check_main_menu_selection(){
