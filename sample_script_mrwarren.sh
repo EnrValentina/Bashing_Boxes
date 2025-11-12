@@ -4,6 +4,8 @@ my_array_of_things=("Key" "Rolling Pin" "Notebook" "Birdhouse" "Dishwasher" "Too
 
 user_input="Error: could not retrieve user selection."
 
+my_array_of_things
+
 display_main_menu(){
 	clear
 	echo -e "
@@ -73,6 +75,8 @@ print_item_at_x_position(){
     display_main_menu	
 }
 
+my_array_of_things
+
 add_item_to_list(){
 	read -p "What item would you like to add?: " new_item
         my_array_of_things+=("$new_item")
@@ -97,18 +101,21 @@ remove_item_from_x_position(){
     display_main_menu
 }
 
+my_array_of_things
+
 save_current_box(){
 	read -p "Enter name of file to save: " filename
-	printf "%s\n" "${my_array_of_things[@]}" > "${filename}.txt"
+	printf "%s\n" "${my_array_of_things}" > "${filename}.txt"
 	echo "Box saved as ${filename}.txt"
 	read -p "Press Enter to go back..."
+	source "${filename}.txt"
     display_save_load_menu
 }
 
 load_box_from_data(){
 	read -p "Enter file you want to load: " filename
-	mapfile -t my_array_of_things < "$filename" 2>/dev/null
-	echo -e "\nBox '$filename' loaded"
+	mapfile -t my_array_of_things < "${filename}.txt" 2>/dev/null
+	echo -e "\nBox '${filename}' loaded\n"
 	echo "-----------------------------"
 	for item in "${my_array_of_things[@]}"; do
 		echo " - $item"
