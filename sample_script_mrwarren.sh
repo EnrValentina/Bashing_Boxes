@@ -5,6 +5,12 @@ my_array_of_things=("Key" "Rolling Pin" "Notebook" "Birdhouse" "Dishwasher" "Too
 user_input="Error: could not retrieve user selection."
 
 my_array_of_things
+green_s="\033[0;32m"
+green_e="\033[0m"
+
+format_line(){
+	echo "-----------------------------"
+}
 
 display_main_menu(){
 	clear
@@ -105,24 +111,29 @@ my_array_of_things
 
 save_current_box(){
 	read -p "Enter name of file to save: " filename
-	printf "%s\n" "${my_array_of_things}" > "${filename}.txt"
+	printf "%s\n" "${my_array_of_things[@]}" > "${filename}.txt"
 	echo "Box saved as ${filename}.txt"
 	read -p "Press Enter to go back..."
-	source "${filename}.txt"
     display_save_load_menu
 }
 
 load_box_from_data(){
 	read -p "Enter file you want to load: " filename
 	mapfile -t my_array_of_things < "${filename}.txt" 2>/dev/null
-	echo -e "\nBox '${filename}' loaded\n"
-	echo "-----------------------------"
+	format_line
+	echo -e $green_s"Loaded Box: '${filename}.txt'"$green_e
+	format_line
 	for item in "${my_array_of_things[@]}"; do
 		echo " - $item"
 	done
-	echo "-----------------------------"
+	option_sort_current_box_abc
 	read -p "Press Enter to go back..."
 	display_save_load_menu
+}
+
+option_sort_current_box_abc(){
+	read -p "Do you want to sort this box alphabetically? (Y/N): " user_input
+	mapfile -t
 }
 
 see_all_saved_boxes(){
@@ -177,6 +188,19 @@ check_save_menu_selection(){
 		5) exit
 			;;
 		*) display_save_load_menu
+			;;
+	esac
+}
+
+check_sort_current_box_abc(){
+		case $user_input in
+		Y) option_sort_current_box_abc
+			;;
+		y) option_sort_current_box_abc
+			;;
+		N) display_save_load_menu
+			;;
+		n) display_save_load_menu
 			;;
 	esac
 }
