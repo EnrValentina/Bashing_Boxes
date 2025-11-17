@@ -133,7 +133,8 @@ load_box_from_data(){
 
 option_sort_current_box_abc(){
 	read -p "Do you want to sort this box alphabetically? (Y/N): " user_input
-	mapfile -t
+	mapfile -t my_array_of_things < <(printf '%s\n' "${my_array_of_things[@]}" | sort)
+	echo "${my_array_of_things[@]}"
 }
 
 see_all_saved_boxes(){
