@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-my_array_of_things=("Key" "Rolling Pin" "Notebook" "Birdhouse" "Dishwasher" "Toothbrush" "Chalkboard" "Shoelaces" "Colander" "Shopping Bag")
+my_array_of_things=("Key" "Rolling Pin" "Notebook" "Birdhouse" "Dishwasher" "Toothbrush" "Chalkboard" "Shoelaces" "Colander" "Roblox")
 
 user_input="Error: could not retrieve user selection."
 
@@ -27,7 +27,7 @@ display_main_menu(){
 	| 7) Chalkboard
 	| 8) Shoelaces
 	| 9) Colander
-	| 10) Shopping Bag
+	| 10) Roblox
 	|
 	-----------------------------"
 	echo -e "
@@ -110,11 +110,14 @@ remove_item_from_x_position(){
 my_array_of_things
 
 save_current_box(){
+	mkdir -p data
+	echo "Created data /directory"
 	read -p "Enter name of file to save: " filename
-	printf "%s\n" "${my_array_of_things[@]}" > "${filename}.txt"
-	echo "Box saved as ${filename}.txt"
+	declare	-p boxes > "data/${filename}.sh"
+	echo "Box saved as data/${filename}.txt"
 	read -p "Press Enter to go back..."
     display_save_load_menu
+fi
 }
 
 load_box_from_data(){

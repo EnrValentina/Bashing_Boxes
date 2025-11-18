@@ -8,6 +8,6 @@ Chalkboard
 Shoelaces
 Colander
 Shopping Bag
+water
+salt
 sugar
-candycane
-pancil
