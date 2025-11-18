@@ -113,11 +113,10 @@ save_current_box(){
 	mkdir -p data
 	echo "Created data /directory"
 	read -p "Enter name of file to save: " filename
-	declare	-p boxes > "data/${filename}.sh"
+	declare	-p boxes > "data/${filename}.txt"
 	echo "Box saved as data/${filename}.txt"
 	read -p "Press Enter to go back..."
     display_save_load_menu
-fi
 }
 
 load_box_from_data(){
