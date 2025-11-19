@@ -132,6 +132,15 @@ load_box_from_data(){
 	display_save_load_menu 
 }
 
+search_item_in_current_box(){
+	read -p "Enter item you want to search for: " user_input
+	printf "%s\n" "${my_array_of_things[@]}" | grep -i "$user_input" 2>/dev/null
+	echo "In the file: "
+	grep -i "$user_input" infile.txt 2>/dev/null
+	read -p "Press Enter to go back..." 
+	display_save_load_menu 
+}
+
 option_sort_current_box_abc(){
 	read -p "Do you want to sort this box alphabetically? (Y/N): " user_input
 	mapfile -t my_array_of_things < <(printf '%s\n' "${my_array_of_things[@]}" | sort)
@@ -185,9 +194,11 @@ check_save_menu_selection(){
 			;;
 		3) load_box_from_data
 			;;
-		4) display_main_menu
+		4) search_item_in_current_box
 			;;
-		5) exit
+		5) display_main_menu
+			;;
+		6) exit
 			;;
 		*) display_save_load_menu
 			;;
